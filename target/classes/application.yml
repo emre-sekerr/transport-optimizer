@@ -1,0 +1,48 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: transport-optimizer
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=10m
+  jackson:
+    serialization:
+      indent-output: true
+
+
+ors:
+  api:
+    base-url: https://api.openrouteservice.org
+    key: YOUR_API_KEY 
+    timeout-seconds: 30
+    max-retries: 3
+
+
+optimizer:
+  max-locations: 50          
+  max-vehicles: 20           
+  default-vehicle-capacity: 1000  
+  time-window-tolerance: 300      
+  algorithm: nearest-neighbor     
+  two-opt-iterations: 100         
+
+
+logging:
+  level:
+    com.transport: DEBUG
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /api-docs
